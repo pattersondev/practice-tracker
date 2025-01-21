@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
 import "./App.css";
 import { Background } from "./components/Background";
 
@@ -45,21 +46,36 @@ function App() {
             </p>
           </div>
           <div className="stat-item">
-            <label>Success Rate</label>
+            <label>Grade</label>
             <p className="stat-value">{percentage}%</p>
           </div>
         </div>
         <div className="buttons">
-          <button className="correct" onClick={() => handleAnswer(true)}>
-            ✓ Correct
+          <button
+            className="correct icon-button"
+            onClick={() => handleAnswer(true)}
+            aria-label="Mark as correct"
+          >
+            <FaCheck />
+            <span>Correct</span>
           </button>
-          <button className="incorrect" onClick={() => handleAnswer(false)}>
-            ✗ Incorrect
+          <button
+            className="incorrect icon-button"
+            onClick={() => handleAnswer(false)}
+            aria-label="Mark as incorrect"
+          >
+            <FaTimes />
+            <span>Incorrect</span>
+          </button>
+          <button
+            className="clear icon-button"
+            onClick={handleClear}
+            aria-label="Clear progress"
+          >
+            <FaTrash />
+            <span>Clear</span>
           </button>
         </div>
-        <button className="clear" onClick={handleClear}>
-          Clear Progress
-        </button>
       </div>
     </>
   );

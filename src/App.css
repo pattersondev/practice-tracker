@@ -54,10 +54,16 @@ h1 {
 .stat-item {
   flex: 1;
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-item label {
   display: block;
+  width: 100%;
+  text-align: center;
   font-size: 0.875rem;
   color: var(--gray-700);
   margin-bottom: 0.75rem;
@@ -68,6 +74,8 @@ h1 {
 
 .stat-value {
   margin: 0;
+  width: 100%;
+  text-align: center;
   font-size: 2.25rem;
   font-weight: 700;
   color: var(--gray-900);
@@ -79,59 +87,91 @@ h1 {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin: 0 auto;
 }
 
-button {
-  padding: 1rem 2rem;
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
   font-size: 1.125rem;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 600;
   letter-spacing: 0.025em;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.icon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 }
 
-button:active {
-  transform: translateY(0);
+.icon-button:hover::before {
+  transform: translateX(0);
+}
+
+.icon-button svg {
+  width: 1.25em;
+  height: 1.25em;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:hover svg {
+  transform: scale(1.1);
+}
+
+.icon-button span {
+  position: relative;
+  z-index: 1;
 }
 
 .correct {
   background: var(--success);
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
 }
 
 .correct:hover {
   background: var(--success-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(34, 197, 94, 0.25);
 }
 
 .incorrect {
   background: var(--danger);
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
 }
 
 .incorrect:hover {
   background: var(--danger-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(239, 68, 68, 0.25);
 }
 
 .clear {
   background: var(--gray-200);
   color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 10px;
-}
-
-.clear:hover {
-  background: var(--gray-100);
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 480px) {
@@ -145,16 +185,23 @@ button:active {
     width: calc(100% - 2rem);
   }
   
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .icon-button {
+    width: 100%;
+    min-width: unset;
+    justify-content: center;
+  }
+  
   h1 {
     font-size: 2rem;
   }
   
   .stat-value {
     font-size: 1.875rem;
-  }
-  
-  .buttons {
-    flex-direction: column;
   }
   
   .stats {
